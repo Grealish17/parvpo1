@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 	
 	srand(random_seed);
 	
-	printf("OpenMP: %d;\n", _OPENMP);
+	printf("OpenMP : %d;\n", _OPENMP);
 	
 	double start, finish;
 	start = omp_get_wtime();
