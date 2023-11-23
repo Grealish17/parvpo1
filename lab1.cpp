@@ -14,17 +14,17 @@ int main(int argc, char *argv[]){
 	
 	printf("OpenMP : %d;\n", _OPENMP);
 	
+	array = (int*)malloc(count * sizeof(int));
+	for (int i = 0; i < count; ++i) {
+		array[i]= rand();
+	}
+	
 	double start, finish;
 	start = omp_get_wtime();
 	
-	array = (int*)malloc(count * sizeof(int));
-	for (int i = 0; i < count; ++i) {
-			array[i]= rand();
-	}
-	
 	for (int th = 1; th < threads; ++th){
 		max = -1;
-		#pragma omp parallel num_threads(th) shared(array, count) reduction(max: max) default(none)
+		#pragma omp parallel num_threads(th) reduction(max: max)
 		{
 			#pragma omp for
 			for (int i = 0; i < count; ++i) {
