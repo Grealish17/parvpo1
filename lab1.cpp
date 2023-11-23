@@ -1,28 +1,24 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
 #include <omp.h>
-#include <time.h>
+#include <ctime>
 
 
 int main(int argc, char *argv[]){
 	double start, finish;
 	start = omp_get_wtime();
 	
-	const int count = 1000000; ///< Number of array elements
-	const int threads = 16; ///< Number of parallel threads to use
-	const int random_seed = 567; ///< RNG seed
-	const int reps = 2000; ///< Number of repetitions
-	int** array = 0; ///< The arrays we need to find the max in
-	int max = -1; ///< The maximal element
+	const int count = 1000000;
+	const int threads = 16;
+	const int random_seed = 567;
+	const int reps = 2000;
+	int** array = 0;
+	int max = -1;
 	
-	/* Initialize the RNG */
 	srand(random_seed);
 	
-	/* Determine the OpenMP support */
 	printf("OpenMP: %d;\n", _OPENMP);
 	printf("Arrays length: %d; Max threads: %d; Reps: %d;\n", count, threads-1, reps);
 	
-	/* Generate the random array */
 	array = (int**)malloc(reps * sizeof(int*));
 	for (int i = 0; i < reps; ++i) {
 		array[i] = (int*)malloc(count * sizeof(int));
