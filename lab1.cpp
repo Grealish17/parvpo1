@@ -3,10 +3,7 @@
 #include <ctime>
 
 
-int main(int argc, char *argv[]){
-	double start, finish;
-	start = omp_get_wtime();
-	
+int main(int argc, char *argv[]){	
 	const int count = 2000000000;
 	const int threads = 16;
 	const int random_seed = 567;
@@ -21,6 +18,9 @@ int main(int argc, char *argv[]){
 	for (int i = 0; i < count; ++i) {
 			array[i]= rand();
 	}
+	
+	double start, finish;
+	start = omp_get_wtime();
 	
 	for (int th = 1; th < threads; ++th){
 		max = -1;
