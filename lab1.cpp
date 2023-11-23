@@ -17,7 +17,6 @@ int main(int argc, char *argv[]){
 	srand(random_seed);
 	
 	printf("OpenMP: %d;\n", _OPENMP);
-	printf("Arrays length: %d; Max threads: %d; Reps: %d;\n", count, threads-1, reps);
 	
 	array = (int**)malloc(reps * sizeof(int*));
 	for (int i = 0; i < reps; ++i) {
@@ -41,6 +40,10 @@ int main(int argc, char *argv[]){
 			}
 		}
 	}
+	for (int i = 0; i < reps; ++i) {
+		free(array[i]);
+	}
+	free(array);
 	finish = omp_get_wtime();
 	printf("Time: %lf \n", (finish - start));
 	return(0);
